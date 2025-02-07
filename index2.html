@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        :root {
+            --primary: #F8F9FA;
+            --secondary: #495057;
+            --accent: #4A6FA5;
+            --text: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Responsive Navigation */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 5%;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        [data-aos] {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 3%;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <h2>Portfolio</h2>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <section class="projects-grid" id="projects">
+        <div class="project-card" data-aos="fade-up">
+            <img src="project1.jpg" alt="Project 1">
+            <div class="project-info">
+                <h3>Project 1</h3>
+                <p>Project description</p>
+            </div>
+        </div>
+        <!-- Add more project cards -->
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize animations
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Reveal animations on scroll
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('[data-aos]');
+            elements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if(elementTop < window.innerHeight) {
+                    el.classList.add('aos-animate');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
